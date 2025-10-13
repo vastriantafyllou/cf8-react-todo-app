@@ -37,15 +37,18 @@ const ToDoList = ({todos, deleteTodo, editTodo, toggleTodo}: ToDoListProps) => {
                     type="text"
                     value={editText}
                     onChange={(e) => setEditText(e.target.value)}
-                    className="flex-1 border rounded p-1"/>
+                    className="flex-1 border rounded p-1"
+                  />
                   <IconButton
-                    addClasses={"cursor-pointer"}
+                    addClasses="cursor-pointer"
                     icon={<Save size={18}/>}
-                    onClick={handleSave(todo.id)} />
+                    onClick={handleSave(todo.id)}
+                  />
                   <IconButton
-                    addClasses={"text-cf-dark-red cursor-pointer"}
+                    addClasses="text-cf-dark-red cursor-pointer"
                     icon={<X size={18}/>}
-                    onClick={handleCancel} />
+                    onClick={handleCancel()}
+                  />
                 </div>
               </>
             ) : (
