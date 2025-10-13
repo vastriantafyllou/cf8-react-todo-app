@@ -3,6 +3,7 @@ import ToDoForm from "./ToDoForm.tsx";
 import type {ToDoProps} from "../../types.ts";
 import ToDoList from "./ToDoList.tsx";
 import ToDoStats from "./ToDoStats.tsx";
+import Button from "../ui/Button.tsx";
 
 const ToDo =()  => {
   const [todos, setTodos] = useState<ToDoProps[]>([]);
@@ -37,6 +38,10 @@ const ToDo =()  => {
     );
   };
 
+  const clearAll = () => {
+    setTodos([]);
+  }
+
   const totalTasks = todos.length;
   const completedTasks = todos.filter(t => t.completed).length;
   const activeTasks = totalTasks - completedTasks;
@@ -57,15 +62,24 @@ const ToDo =()  => {
           toggleTodo={toggleTodo}/>
 
         {totalTasks > 0 && (
-          // Component: ToDoStats
-          <ToDoStats
-            total = {totalTasks}
-            active = {activeTasks}
-            completed = {completedTasks}
-          />
-        )}
+          <>
+            {/*Component: ToDoStats*/}
+            <ToDoStats
+              total = {totalTasks}
+              active = {activeTasks}
+              completed = {completedTasks}
+            />
 
-        {/*  Component: Button  */}
+            {/*Component: Clear All Button*/}
+            <div className="text-end mt-4">
+              <Button
+                addClasses="bg-cf-dark-red"
+                label="Clear All"
+                onClick={clearAll}
+              />
+            </div>
+          </>
+        )}
       </div>
     </>
   );
