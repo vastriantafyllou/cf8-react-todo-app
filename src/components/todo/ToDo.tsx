@@ -2,6 +2,7 @@ import {useRef, useState} from "react";
 import ToDoForm from "./ToDoForm.tsx";
 import type {ToDoProps} from "../../types.ts";
 import ToDoList from "./ToDoList.tsx";
+import ToDoStats from "./ToDoStats.tsx";
 
 const ToDo =()  => {
   const [todos, setTodos] = useState<ToDoProps[]>([]);
@@ -21,9 +22,10 @@ const ToDo =()  => {
   }
 
   const editTodo = (id: number, newText: string) => {
-    setTodos(prev => prev.map(todo =>
-    todo.id === id ? {...todo, text:newText}: todo
-    )
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id ? {...todo, text:newText}: todo
+      )
     );
   };
 
@@ -35,26 +37,38 @@ const ToDo =()  => {
     );
   };
 
+  const totalTasks = todos.length;
+  const completedTasks = todos.filter(t => t.completed).length;
+  const activeTasks = totalTasks - completedTasks;
+
   return (
     <>
-      <div className="max-w-sm mx-auto">
+      <div className="max-w-sm mx-auto pb-12">
         <h1 className="text-center text-2xl py-8">To-Do List</h1>
 
+        {/*  Component: TodoForm */}
         <ToDoForm addToDo={addTodo} inputRef={inputRef}/>
 
+        {/*  Component: TodoList */}
         <ToDoList
           todos={todos}
           deleteTodo={deleteTodo}
           editTodo={editTodo}
           toggleTodo={toggleTodo}/>
 
-      {/*  Component: ToDoStats  */}
-      {/*  Component: Button  */}
+        {totalTasks > 0 && (
+          // Component: ToDoStats
+          <ToDoStats
+            total = {totalTasks}
+            active = {activeTasks}
+            completed = {completedTasks}
+          />
+        )}
 
-
+        {/*  Component: Button  */}
       </div>
     </>
-  )
-}
+  );
+};
 
 export default ToDo;
