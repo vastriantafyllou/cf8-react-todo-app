@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import ToDoForm from "./ToDoForm.tsx";
 import type {ToDoProps} from "../../types.ts";
 import ToDoList from "./ToDoList.tsx";
@@ -45,6 +45,10 @@ const ToDo =()  => {
   const totalTasks = todos.length;
   const completedTasks = todos.filter(t => t.completed).length;
   const activeTasks = totalTasks - completedTasks;
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [todos])
 
   return (
     <>

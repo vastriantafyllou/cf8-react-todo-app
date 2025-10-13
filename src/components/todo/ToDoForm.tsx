@@ -14,7 +14,6 @@ const ToDoForm = ({addToDo, inputRef}:ToDoFormProps) => {
     if (text.trim() !== "") {
       addToDo(text);
       setText("");
-      inputRef.current?.focus();
     }
   }
 
