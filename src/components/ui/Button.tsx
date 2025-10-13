@@ -4,8 +4,8 @@ const Button = ({onClick, disabled=false, label, addClasses=""} : ButtonProps) =
 
   return (
     <>
-      <button className={`bg-cf-dark-gray opacity-80 hover:opacity-100 
-      text-white px-4 py-2 rounded cursor-pointer` + addClasses}
+      <button className={` bg-cf-dark-gray opacity-80 hover:opacity-100 
+      text-white px-4 py-2 rounded cursor-pointer ` + addClasses}
         onClick={onClick}
         disabled={disabled}
       >
